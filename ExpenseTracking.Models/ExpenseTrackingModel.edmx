@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FooModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="FooModelStoreContainer">
+          <EntitySet Name="Expense_tbl" EntityType="FooModel.Store.Expense_tbl" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tag_tbl" EntityType="FooModel.Store.Tag_tbl" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Expense_tbl_Tag_tbl" Association="FooModel.Store.FK_Expense_tbl_Tag_tbl">
+            <End Role="Tag_tbl" EntitySet="Tag_tbl" />
+            <End Role="Expense_tbl" EntitySet="Expense_tbl" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Expense_tbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExpenseDate" Type="smalldatetime" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="TagID" Type="int" />
+          <Property Name="UserID" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="Tag_tbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Expense_tbl_Tag_tbl">
+          <End Role="Tag_tbl" Type="FooModel.Store.Tag_tbl" Multiplicity="0..1" />
+          <End Role="Expense_tbl" Type="FooModel.Store.Expense_tbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag_tbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Expense_tbl">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FooModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="FooEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tag_tbl" EntityType="FooModel.Tag_tbl" />
+          <EntitySet Name="Expense_tbl" EntityType="FooModel.Expense_tbl" />
+          <AssociationSet Name="FK_Expense_tbl_Tag_tbl" Association="FooModel.FK_Expense_tbl_Tag_tbl">
+            <End Role="Tag_tbl" EntitySet="Tag_tbl" />
+            <End Role="Expense_tbl" EntitySet="Expense_tbl" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Tag_tbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Expense_tbl" Relationship="FooModel.FK_Expense_tbl_Tag_tbl" FromRole="Tag_tbl" ToRole="Expense_tbl" />
+        </EntityType>
+        <EntityType Name="Expense_tbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="ExpenseDate" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Amount" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="TagID" />
+          <Property Type="String" Name="UserID" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tag_tbl" Relationship="FooModel.FK_Expense_tbl_Tag_tbl" FromRole="Expense_tbl" ToRole="Tag_tbl" />
+        </EntityType>
+        <Association Name="FK_Expense_tbl_Tag_tbl">
+          <End Type="FooModel.Tag_tbl" Role="Tag_tbl" Multiplicity="0..1" />
+          <End Type="FooModel.Expense_tbl" Role="Expense_tbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag_tbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Expense_tbl">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FooModelStoreContainer" CdmEntityContainer="FooEntities">
+          <EntitySetMapping Name="Tag_tbl"><EntityTypeMapping TypeName="FooModel.Tag_tbl"><MappingFragment StoreEntitySet="Tag_tbl">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Expense_tbl">
+            <EntityTypeMapping TypeName="FooModel.Expense_tbl">
+              <MappingFragment StoreEntitySet="Expense_tbl">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ExpenseTrackingModel">
+        <EntityTypeShape EntityType="FooModel.Tag_tbl" Width="1.5" PointX="0.75" PointY="1.125" Height="1.4430468571186066" IsExpanded="true" />
+        <EntityTypeShape EntityType="FooModel.Expense_tbl" Width="1.5" PointX="3" PointY="0.75" Height="2.1104947618643433" />
+        <AssociationConnector Association="FooModel.FK_Expense_tbl_Tag_tbl" >
+          <ConnectorPoint PointX="2.25" PointY="1.8465234285593033" />
+          <ConnectorPoint PointX="3" PointY="1.8465234285593033" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

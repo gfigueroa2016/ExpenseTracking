@@ -1,0 +1,7 @@
+D:\TEST PROJECT\UKRAINE TEST PROJECT\ExpenseTracking\ExpenseTracking.Models\bin\ExpenseTracking.Models.dll
+D:\TEST PROJECT\UKRAINE TEST PROJECT\ExpenseTracking\ExpenseTracking.Models\bin\ExpenseTracking.Models.pdb
+D:\TEST PROJECT\UKRAINE TEST PROJECT\ExpenseTracking\ExpenseTracking.Models\bin\EntityFramework.dll
+D:\TEST PROJECT\UKRAINE TEST PROJECT\ExpenseTracking\ExpenseTracking.Models\bin\EntityFramework.xml
+D:\TEST PROJECT\UKRAINE TEST PROJECT\ExpenseTracking\ExpenseTracking.Models\obj\Debug\ResolveAssemblyReference.cache
+D:\TEST PROJECT\UKRAINE TEST PROJECT\ExpenseTracking\ExpenseTracking.Models\obj\Debug\ExpenseTracking.Models.dll
+D:\TEST PROJECT\UKRAINE TEST PROJECT\ExpenseTracking\ExpenseTracking.Models\obj\Debug\ExpenseTracking.Models.pdb

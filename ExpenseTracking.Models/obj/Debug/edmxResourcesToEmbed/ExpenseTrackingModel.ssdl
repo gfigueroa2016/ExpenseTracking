@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FooModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="FooModelStoreContainer">
+    <EntitySet Name="Expense_tbl" EntityType="FooModel.Store.Expense_tbl" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tag_tbl" EntityType="FooModel.Store.Tag_tbl" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Expense_tbl_Tag_tbl" Association="FooModel.Store.FK_Expense_tbl_Tag_tbl">
+      <End Role="Tag_tbl" EntitySet="Tag_tbl" />
+      <End Role="Expense_tbl" EntitySet="Expense_tbl" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Expense_tbl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ExpenseDate" Type="smalldatetime" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="TagID" Type="int" />
+    <Property Name="UserID" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="Tag_tbl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Expense_tbl_Tag_tbl">
+    <End Role="Tag_tbl" Type="FooModel.Store.Tag_tbl" Multiplicity="0..1" />
+    <End Role="Expense_tbl" Type="FooModel.Store.Expense_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag_tbl">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Expense_tbl">
+        <PropertyRef Name="TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
